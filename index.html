@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renter: Renting made simple</title>
+<meta name="description" content="The only app in Australia built entirely for renters. Write better applications, understand your lease, and track every property you have applied for.">
+<meta property="og:title" content="Renter: Renting made simple">
+<meta property="og:description" content="8.5 million Australians rent. Renter is the first app built entirely for the renting side of the equation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1A3DE4;
+  --navy: #0F1F7A;
+  --cloud: #EEF1FD;
+  --white: #ffffff;
+  --off: #F6F7FB;
+  --black: #111827;
+  --gray: #6B7280;
+  --light-gray: #CBD5E1;
+  --green: #059669;
+  --green-bg: #ECFDF5;
+  --border: rgba(26,61,228,0.1);
+  --radius: 12px;
+  --font: 'Inter', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--white);
+  color: var(--black);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 0.5px solid var(--border);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+}
+
+.nav-mark {
+  width: 32px; height: 32px;
+  background: var(--blue);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-mark svg { width: 16px; height: 16px; }
+
+.nav-word {
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: -0.03em;
+}
+
+.nav-cta {
+  background: var(--blue);
+  color: var(--white);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 20px;
+  border-radius: 99px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.15s, transform 0.15s;
+  letter-spacing: -0.01em;
+}
+.nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 1.5rem 80px;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(26,61,228,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,61,228,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black, transparent);
+}
+
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(26,61,228,0.07) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -60%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 760px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--cloud);
+  color: var(--blue);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 99px;
+  margin-bottom: 28px;
+  border: 1px solid rgba(26,61,228,0.15);
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.1s forwards;
+  letter-spacing: -0.01em;
+}
+
+.badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.4; transform:scale(0.75); }
+}
+
+h1 {
+  font-family: var(--font);
+  font-size: clamp(48px, 7.5vw, 84px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--black);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.2s forwards;
+}
+
+h1 .accent { color: var(--blue); }
+
+.hero-sub {
+  font-family: var(--font);
+  font-size: clamp(15px, 2vw, 18px);
+  font-weight: 400;
+  color: var(--gray);
+  line-height: 1.65;
+  max-width: 520px;
+  margin: 0 auto 40px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.35s forwards;
+}
+
+.hero-sub strong { color: var(--black); font-weight: 600; }
+
+.waitlist-form {
+  display: flex;
+  gap: 8px;
+  max-width: 460px;
+  margin: 0 auto 14px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.5s forwards;
+}
+
+.waitlist-input {
+  flex: 1;
+  height: 50px;
+  padding: 0 18px;
+  border: 1.5px solid rgba(26,61,228,0.15);
+  border-radius: 99px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black);
+  background: var(--white);
+  outline: none;
+  transition: border-color 0.15s;
+  letter-spacing: -0.01em;
+}
+.waitlist-input:focus { border-color: var(--blue); }
+.waitlist-input::placeholder { color: var(--light-gray); }
+
+.waitlist-btn {
+  height: 50px;
+  padding: 0 28px;
+  background: var(--blue);
+  color: var(--white);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 99px;
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.waitlist-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+.hero-note {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--light-gray);
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.6s forwards;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 0.5px solid var(--border);
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.75s forwards;
+}
+
+.stat-num {
+  font-family: var(--font);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: -0.04em;
+}
+
+.stat-label {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--gray);
+  margin-top: 3px;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* ── TRUST BAR ── */
+.trust-bar {
+  background: var(--navy);
+  padding: 16px 2rem;
+  text-align: center;
+}
+.trust-text {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: -0.01em;
+}
+.trust-text strong { color: rgba(255,255,255,0.88); font-weight: 600; }
+
+/* ── SECTIONS ── */
+section { padding: 96px 1.5rem; }
+
+.section-inner { max-width: 1080px; margin: 0 auto; }
+
+.section-tag {
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: var(--font);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: var(--black);
+  margin-bottom: 16px;
+}
+
+.section-sub {
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--gray);
+  line-height: 1.65;
+  max-width: 520px;
+  letter-spacing: -0.01em;
+}
+
+/* ── PROBLEM ── */
+.problem { background: var(--off); }
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 56px;
+}
+
+.problem-cards { display: flex; flex-direction: column; gap: 12px; }
+
+.problem-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  border: 0.5px solid rgba(0,0,0,0.06);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.problem-icon {
+  width: 36px; height: 36px;
+  background: #EEF1FD;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.problem-card-title {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 3px;
+  letter-spacing: -0.01em;
+}
+
+.problem-card-desc {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+.problem-statement {
+  font-family: var(--font);
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.problem-statement .highlight { color: var(--blue); }
+
+.problem-body {
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+/* ── JOURNEY ── */
+.journey-stages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 56px;
+}
+
+.stage-card {
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  transition: transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.stage-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--blue);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.stage-card:hover { transform: translateY(-3px); }
+.stage-card:hover::before { opacity: 1; }
+
+.stage-num {
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  margin-bottom: 7px;
+}
+
+.stage-title {
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.stage-features { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+
+.stage-features li {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray);
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  line-height: 1.4;
+}
+
+.stage-features li::before {
+  content: '→';
+  color: var(--blue);
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── FEATURES DARK ── */
+.features-bg { background: var(--navy); }
+.features-bg .section-tag { color: rgba(255,255,255,0.45); }
+.features-bg .section-title { color: var(--white); }
+.features-bg .section-sub { color: rgba(255,255,255,0.55); }
+
+.features-big-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 56px;
+}
+
+.feature-big {
+  background: rgba(255,255,255,0.05);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 26px;
+}
+
+.feature-big.featured {
+  background: var(--blue);
+  border-color: transparent;
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.feature-big-icon {
+  width: 42px; height: 42px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+}
+
+.feature-big-title {
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.feature-big-desc {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.65;
+}
+
+.feature-demo-box {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 20px;
+  border: 0.5px solid rgba(255,255,255,0.15);
+}
+
+.demo-label {
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 10px;
+}
+
+.demo-text {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.65;
+  font-style: italic;
+}
+
+/* ── MOAT ── */
+.moat { background: var(--off); }
+
+.moat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 56px;
+}
+
+.moat-table {
+  background: var(--white);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 0.5px solid var(--border);
+}
+
+.moat-row {
+  display: grid;
+  grid-template-columns: 1fr 72px 72px;
+  padding: 12px 20px;
+  border-bottom: 0.5px solid var(--border);
+  align-items: center;
+  gap: 8px;
+}
+.moat-row:last-child { border-bottom: none; }
+
+.moat-row.header {
+  background: var(--off);
+  padding: 10px 20px;
+}
+
+.moat-header-label {
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  text-align: center;
+}
+.moat-header-label:first-child { text-align: left; }
+.moat-header-label.ours { color: var(--blue); }
+
+.moat-feature {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+.moat-check { text-align: center; font-size: 15px; }
+.check-yes { color: var(--green); }
+.check-no { color: #E2E8F0; }
+.check-renter { color: var(--blue); font-weight: 700; }
+
+/* ── PROOF ── */
+.proof { background: var(--off); }
+
+.proof-quotes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 56px;
+}
+
+.quote-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 22px;
+  border: 0.5px solid var(--border);
+}
+
+.quote-text {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black);
+  line-height: 1.65;
+  font-style: italic;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.quote-author { display: flex; align-items: center; gap: 10px; }
+
+.quote-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.quote-name {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+  letter-spacing: -0.01em;
+}
+
+.quote-meta {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--gray);
+}
+
+/* ── PRICING ── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 56px;
+  max-width: 680px;
+}
+
+.price-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  padding: 30px;
+}
+
+.price-card.featured {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.price-tag-pill {
+  display: inline-block;
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 4px 10px;
+  border-radius: 99px;
+  margin-bottom: 18px;
+  background: var(--cloud);
+  color: var(--blue);
+}
+
+.price-card.featured .price-tag-pill {
+  background: rgba(255,255,255,0.2);
+  color: var(--white);
+}
+
+.price-amount {
+  font-family: var(--font);
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+
+.price-card.featured .price-amount { color: var(--white); }
+
+.price-period {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray);
+  margin-bottom: 22px;
+}
+
+.price-card.featured .price-period { color: rgba(255,255,255,0.6); }
+
+.price-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 26px;
+}
+
+.price-features li {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray);
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+
+.price-card.featured .price-features li { color: rgba(255,255,255,0.8); }
+
+.price-features li span { color: var(--green); font-size: 13px; flex-shrink: 0; }
+.price-card.featured .price-features li span { color: rgba(255,255,255,0.9); }
+
+.price-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border-radius: 99px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--black);
+  transition: all 0.15s;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.price-btn:hover { background: var(--off); }
+
+.price-card.featured .price-btn {
+  background: var(--white);
+  color: var(--blue);
+  border-color: transparent;
+  font-weight: 700;
+}
+
+.price-card.featured .price-btn:hover { opacity: 0.9; }
+
+/* ── FINAL CTA ── */
+.final-cta {
+  background: var(--blue);
+  text-align: center;
+  padding: 96px 1.5rem;
+}
+
+.final-cta .section-title { color: var(--white); max-width: 500px; margin: 0 auto 14px; }
+.final-cta .section-sub { color: rgba(255,255,255,0.65); margin: 0 auto 40px; text-align: center; }
+
+.final-form {
+  display: flex;
+  gap: 8px;
+  max-width: 440px;
+  margin: 0 auto 14px;
+}
+
+.final-input {
+  flex: 1;
+  height: 50px;
+  padding: 0 18px;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 99px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--white);
+  background: rgba(255,255,255,0.1);
+  outline: none;
+  transition: border-color 0.15s;
+  letter-spacing: -0.01em;
+}
+.final-input:focus { border-color: rgba(255,255,255,0.7); }
+.final-input::placeholder { color: rgba(255,255,255,0.4); }
+
+.final-btn {
+  height: 50px;
+  padding: 0 28px;
+  background: var(--white);
+  color: var(--blue);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 99px;
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.final-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.final-note { font-family: var(--font); font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.4); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  padding: 48px 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-logo { display: flex; align-items: center; gap: 8px; }
+
+.footer-mark {
+  width: 28px; height: 28px;
+  background: var(--blue);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+}
+.footer-mark svg { width: 14px; height: 14px; }
+
+.footer-word {
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.03em;
+}
+
+.footer-tagline {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.3);
+  margin-top: 3px;
+}
+
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.38);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+.footer-copy {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.2);
+  width: 100%;
+}
+
+/* ── SUCCESS ── */
+.success-msg {
+  display: none;
+  background: var(--green-bg);
+  color: var(--green);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 20px;
+  border-radius: 99px;
+  margin-top: 8px;
+  letter-spacing: -0.01em;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── NAV SCROLL SHADOW ── */
+nav.scrolled {
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  border-bottom-color: rgba(26,61,228,0.12);
+}
+
+/* ── LIVE / SOON BADGES ── */
+.badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: #ECFDF5;
+  color: #059669;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.badge-live-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #059669;
+  animation: pulse-live 2.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse-live {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.4); }
+  50%       { box-shadow: 0 0 0 4px rgba(5,150,105,0); }
+}
+
+.badge-soon {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: #FEF9C3;
+  color: #854D0E;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── JOURNEY 3-STAGE ── */
+.journey-stages-new {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  margin-top: 56px;
+}
+
+.stage-group-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.stage-group-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.stage-group-icon.before { background: #FEF9C3; }
+.stage-group-icon.during { background: var(--cloud); }
+.stage-group-icon.after  { background: #ECFDF5; }
+
+.stage-group-name {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: -0.02em;
+}
+
+.stage-group-desc {
+  font-family: var(--font);
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 1px;
+}
+
+.stage-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  gap: 10px;
+}
+
+.stage-item {
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  /* opacity fades in slowly on reveal; transform/shadow fast on hover */
+  transition: opacity 0.45s ease, transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.stage-item.visible { opacity: 1; }
+
+.stage-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26,61,228,0.1);
+  border-color: rgba(26,61,228,0.2);
+}
+
+.stage-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stage-item-icon { display: inline-flex; align-items: center; flex-shrink: 0; }
+
+.stage-item-name {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+
+.stage-item-desc {
+  font-family: var(--font);
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+/* ── ENHANCED HOVERS ── */
+.feature-big {
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.feature-big:not(.featured):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+  background: rgba(255,255,255,0.09);
+}
+
+.feat-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: rgba(5,150,105,0.2);
+  color: #6EE7B7;
+  margin-top: 14px;
+}
+
+.feat-live-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #6EE7B7;
+  animation: pulse-live 2.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.quote-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.quote-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(26,61,228,0.1);
+  border-color: rgba(26,61,228,0.2);
+}
+
+.price-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.price-card:not(.featured):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(26,61,228,0.1);
+}
+.price-card.featured:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(26,61,228,0.35);
+}
+
+.problem-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.problem-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.price-btn { transition: all 0.15s ease; }
+.price-btn:hover { transform: scale(1.02); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 720px) {
+  .problem-grid, .moat-grid { grid-template-columns: 1fr; gap: 28px; }
+  .journey-stages, .proof-quotes, .features-big-grid { grid-template-columns: 1fr; }
+  .feature-big.featured { grid-column: span 1; grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 24px; }
+  .waitlist-form, .final-form { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-mark">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3L21 9.5V20C21 20.6 20.6 21 20 21H15V15H9V21H4C3.4 21 3 20.6 3 20V9.5Z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>
+    </div>
+    <span class="nav-word">Renter</span>
+  </a>
+  <a href="#waitlist" class="nav-cta">Join the waitlist</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      Launching in Australia. Join the waitlist.
+    </div>
+    <h1>Renting made <span class="accent">simple.</span></h1>
+    <p class="hero-sub">
+      <strong>8.5 million Australians rent.</strong> Every tool that exists was built for landlords and agents. Renter is the first app built entirely for you, covering every step of the renting journey.
+    </p>
+    <div class="waitlist-form" id="waitlist">
+      <input type="email" class="waitlist-input" placeholder="Enter your email" id="heroEmail">
+      <button class="waitlist-btn" onclick="submitWaitlist('heroEmail','heroSuccess')">Join waitlist</button>
+    </div>
+    <div class="success-msg" id="heroSuccess">You're on the list. We'll be in touch.</div>
+    <p class="hero-note">Free to join · No spam · Be first when we launch</p>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">8.5M</div>
+        <div class="stat-label">Australian renters</div>
+      </div>
+      <div>
+        <div class="stat-num">0</div>
+        <div class="stat-label">Apps built for them</div>
+      </div>
+      <div>
+        <div class="stat-num">1</div>
+        <div class="stat-label">App changing that</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <p class="trust-text">Built for renters in <strong>Victoria · NSW · Queensland · Western Australia · South Australia</strong> · More states coming</p>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="section-inner">
+    <div class="section-tag reveal">The problem</div>
+    <div class="problem-grid">
+      <div>
+        <h2 class="problem-statement reveal">The system was built for <span class="highlight">landlords.</span><br>Not for you.</h2>
+        <p class="problem-body reveal">Until now, there has never been a dedicated tool built entirely for the renting side of the equation. Every platform serves the whole market. Landlords, agents, and renters. Renter fills that gap.</p>
+        <p class="problem-body reveal">New laws in 2025 gave renters more rights than ever. No-grounds evictions banned. Rent caps introduced. Minimum property standards mandated. Most renters have no idea how to use them.</p>
+      </div>
+      <div class="problem-cards reveal">
+        <div class="problem-card">
+          <div class="problem-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+          <div>
+            <div class="problem-card-title">Maintenance ignored for months</div>
+            <div class="problem-card-desc">No formal paper trail, no leverage. Most renters don't know they have legal recourse.</div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M7 7V5a1 1 0 011-1h8a1 1 0 011 1v2"/><path d="M2 11h20"/><circle cx="16" cy="16" r="1.5"/></svg></div>
+          <div>
+            <div class="problem-card-title">Bond withheld unfairly</div>
+            <div class="problem-card-desc">$2,000–$5,000 gone, with no guidance on how to dispute it through VCAT or NCAT.</div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h6"/></svg></div>
+          <div>
+            <div class="problem-card-title">Applications keep getting rejected</div>
+            <div class="problem-card-desc">No feedback, no idea what agents actually want. 10+ applications, zero approvals.</div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <div class="problem-card-title">Rights exist but nobody explains them</div>
+            <div class="problem-card-desc">State laws differ. Most renters can't afford a solicitor. Legal Aid is overloaded.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section>
+  <div class="section-inner">
+    <div class="section-tag reveal">The full journey</div>
+    <h2 class="section-title reveal">Tools for every stage of renting.</h2>
+    <p class="section-sub reveal">From searching to moving out. Renter covers the whole journey.</p>
+    <div class="journey-stages-new">
+
+      <!-- Before you rent -->
+      <div class="reveal">
+        <div class="stage-group-header">
+          <div class="stage-group-icon before"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></div>
+          <div>
+            <div class="stage-group-name">Before you rent</div>
+            <div class="stage-group-desc">Research smarter and prepare a stronger application</div>
+          </div>
+        </div>
+        <div class="stage-items">
+          <div class="stage-item" data-delay="0">
+            <div class="stage-item-top">
+              <span class="stage-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></span>
+              <span class="badge-soon">Coming soon</span>
+            </div>
+            <div class="stage-item-name">Suburb rental prices and trends</div>
+            <div class="stage-item-desc">See median rents and price trends for any suburb before you search.</div>
+          </div>
+          <div class="stage-item" data-delay="60">
+            <div class="stage-item-top">
+              <span class="stage-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span>
+              <span class="badge-live"><span class="badge-live-dot"></span>Live</span>
+            </div>
+            <div class="stage-item-name">Cover letter generator</div>
+            <div class="stage-item-desc">AI writes a personalised letter tailored to each property in under a minute.</div>
+          </div>
+          <div class="stage-item" data-delay="120">
+            <div class="stage-item-top">
+              <span class="stage-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>
+              <span class="badge-live"><span class="badge-live-dot"></span>Live</span>
+            </div>
+            <div class="stage-item-name">Application strength scorer</div>
+            <div class="stage-item-desc">Score out of 100 with specific tips to improve before you apply.</div>
+          </div>
+          <div class="stage-item" data-delay="180">
+            <div class="stage-item-top">
+              <span class="stage-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h6"/></svg></span>
+              <span class="badge-live"><span class="badge-live-dot"></span>Live</span>
+            </div>
+            <div class="stage-item-name">AI lease analyser</div>
+            <div class="stage-item-desc">Paste your lease and get a plain-English summary with flagged issues by state.</div>
+          </div>
+          <div class="stage-item" data-delay="240">
+            <div class="stage-item-top">
+              <span class="stage-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg></span>
+              <span class="badge-live"><span class="badge-live-dot"></span>Live</span>
+            </div>
+            <div class="stage-item-name">Application tracker</div>
+            <div class="stage-item-desc">Track every property you have applied for. Status updates and notes, saved locally.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- During renting -->
+      <div class="reveal">
+        <div class="stage-group-header">
+          <div class="stage-group-icon during"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1V9.5z"/></svg></div>
+          <div>
+            <div class="stage-group-name">During renting</div>
+            <div class="stage-group-desc">Know your rights and stay on top of your tenancy</div>
+          </div>
+        </div>
+        <div class="stage-items">
+          <div class="stage-item" data-delay="0">
+            <div class="stage-item-top">
+              <span class="stage-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+              <span class="badge-soon">Coming soon</span>
+            </div>
+            <div class="stage-item-name">Tenancy rights guide</div>
+            <div class="stage-item-desc">Know your rights in plain English, for every state and territory.</div>
+          </div>
+          <div class="stage-item" data-delay="60">
+            <div class="stage-item-top">
+              <span class="stage-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></span>
+              <span class="badge-soon">Coming soon</span>
+            </div>
+            <div class="stage-item-name">Maintenance tracker</div>
+            <div class="stage-item-desc">Log requests with photos and timestamps. A clear record if disputes arise.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- After renting -->
+      <div class="reveal">
+        <div class="stage-group-header">
+          <div class="stage-group-icon after"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 22H5a2 2 0 01-2-2V4a2 2 0 012-2h9"/><path d="M17 15l3-3-3-3M20 12H9"/></svg></div>
+          <div>
+            <div class="stage-group-name">After renting</div>
+            <div class="stage-group-desc">Leave on good terms and get your bond back</div>
+          </div>
+        </div>
+        <div class="stage-items">
+          <div class="stage-item" data-delay="0">
+            <div class="stage-item-top">
+              <span class="stage-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <span class="badge-soon">Coming soon</span>
+            </div>
+            <div class="stage-item-name">Bond return checklist</div>
+            <div class="stage-item-desc">Step-by-step checklist to leave the property in shape and protect your bond.</div>
+          </div>
+          <div class="stage-item" data-delay="60">
+            <div class="stage-item-top">
+              <span class="stage-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A3DE4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 017 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 017-7z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
+              <span class="badge-soon">Coming soon</span>
+            </div>
+            <div class="stage-item-name">End of lease services directory</div>
+            <div class="stage-item-desc">Cleaners, removalists, and tradespeople trusted by renters near you.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES DARK -->
+<section class="features-bg">
+  <div class="section-inner">
+    <div class="section-tag reveal">Live right now</div>
+    <h2 class="section-title reveal">Four tools ready to use today.</h2>
+    <p class="section-sub reveal">No waiting. Sign up and start using these immediately. General guidance only, not legal advice.</p>
+    <div class="features-big-grid">
+      <div class="feature-big featured reveal">
+        <div>
+          <div class="feature-big-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></div>
+          <div class="feature-big-title">AI Cover Letter Generator</div>
+          <div class="feature-big-desc">Write a personalised cover letter in under a minute. Not a template. Tailored to the property and your situation.</div>
+          <div class="feat-live-badge"><span class="feat-live-dot"></span>Live now</div>
+        </div>
+        <div class="feature-demo-box">
+          <div class="demo-label">Sample output</div>
+          <div class="demo-text">"Hi Sarah, I'm applying for the 2-bedroom apartment at 14 Smith St. As a registered nurse at Royal Melbourne, I work regular hours and take pride in a clean, respectful tenancy. I've rented for six years with no disputes and can provide references from two previous property managers..."</div>
+        </div>
+      </div>
+      <div class="feature-big reveal">
+        <div class="feature-big-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+        <div class="feature-big-title">Application Strength Scorer</div>
+        <div class="feature-big-desc">Get a score out of 100 with specific tips to improve your chances before you apply.</div>
+        <div class="feat-live-badge"><span class="feat-live-dot"></span>Live now</div>
+      </div>
+      <div class="feature-big reveal">
+        <div class="feature-big-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h6"/></svg></div>
+        <div class="feature-big-title">AI Lease Analyser</div>
+        <div class="feature-big-desc">Paste your lease and get a plain-English breakdown. Flags issues, explains your rights by state.</div>
+        <div class="feat-live-badge"><span class="feat-live-dot"></span>Live now</div>
+      </div>
+      <div class="feature-big reveal">
+        <div class="feature-big-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg></div>
+        <div class="feature-big-title">Application Tracker</div>
+        <div class="feature-big-desc">Track every property you have applied for with status updates and notes. Saved locally on your device.</div>
+        <div class="feat-live-badge"><span class="feat-live-dot"></span>Live now</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOAT -->
+<section class="moat">
+  <div class="section-inner">
+    <div class="section-tag reveal">Built differently</div>
+    <div class="moat-grid">
+      <div>
+        <h2 class="section-title reveal">Built for one side only.</h2>
+        <p class="section-sub reveal" style="margin-bottom:14px;">Every property platform in Australia serves the whole market. Landlords, agents, and renters. Renter does one thing: works entirely for the person renting. No competing interests. No conflicting priorities.</p>
+        <p class="section-sub reveal">Renter is independent. We make money when renters get value, which means we only win when you do.</p>
+      </div>
+      <div class="moat-table reveal">
+        <div class="moat-row header" style="grid-template-columns:1fr 48px;">
+          <div class="moat-header-label">What makes Renter different</div>
+          <div class="moat-header-label ours">✓</div>
+        </div>
+        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">Built entirely for renters</div><div class="moat-check check-renter">✓</div></div>
+        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">AI cover letter tailored to each property</div><div class="moat-check check-renter">✓</div></div>
+        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">Application strength scoring with tips</div><div class="moat-check check-renter">✓</div></div>
+        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">AI lease analysis in plain English</div><div class="moat-check check-renter">✓</div></div>
+        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">Tenancy rights guide by state</div><div class="moat-check check-renter">✓</div></div>
+        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">Application tracker saved on your device</div><div class="moat-check check-renter">✓</div></div>
+        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">Suburb rental data and trends</div><div class="moat-check check-renter">✓</div></div>
+        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">100% independent, works for you</div><div class="moat-check check-renter">✓</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof">
+  <div class="section-inner">
+    <div class="section-tag reveal">Early feedback</div>
+    <h2 class="section-title reveal">Renters who tested it early.</h2>
+    <div class="proof-quotes">
+      <div class="quote-card reveal">
+        <p class="quote-text">"The cover letter generator was genuinely good. It picked up on what I mentioned about the property and my situation. I got three inspection invites the same week I started using it."</p>
+        <div class="quote-author">
+          <div class="quote-avatar" style="background:#EEF1FD;color:#1A3DE4;">JH</div>
+          <div><div class="quote-name">Jess, 27</div><div class="quote-meta">Young professional, Melbourne</div></div>
+        </div>
+      </div>
+      <div class="quote-card reveal">
+        <p class="quote-text">"I pasted my lease into the analyser and it found a clause about break fees I had completely missed. That would have cost me hundreds. Worth every cent of the premium subscription."</p>
+        <div class="quote-author">
+          <div class="quote-avatar" style="background:#FAEEDA;color:#854F0B;">MA</div>
+          <div><div class="quote-name">Marcus, 43</div><div class="quote-meta">Long-term renter, Sydney</div></div>
+        </div>
+      </div>
+      <div class="quote-card reveal">
+        <p class="quote-text">"The application tracker sounds simple but it changed how I approached my search. I was applying to seven properties at once and had no idea where I stood. Now I can see everything in one place."</p>
+        <div class="quote-author">
+          <div class="quote-avatar" style="background:#FCEBEB;color:#A32D2D;">SW</div>
+          <div><div class="quote-name">Sarah, 38</div><div class="quote-meta">Family renting, Brisbane</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section>
+  <div class="section-inner">
+    <div class="section-tag reveal">Pricing</div>
+    <h2 class="section-title reveal">Start free. Upgrade when it matters.</h2>
+    <p class="section-sub reveal">Free to get started. Upgrade when you need the full toolkit.</p>
+    <div class="pricing-grid reveal">
+      <div class="price-card">
+        <div class="price-tag-pill">Free forever</div>
+        <div class="price-amount">$0</div>
+        <div class="price-period">No credit card needed</div>
+        <ul class="price-features">
+          <li><span>✓</span> Cover letter generator (3 per month)</li>
+          <li><span>✓</span> Application tracker</li>
+          <li><span>✓</span> Bond return checklist</li>
+          <li><span>✓</span> Tenancy rights guide</li>
+        </ul>
+        <a href="#waitlist" class="price-btn">Get started free</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tag-pill">Premium</div>
+        <div class="price-amount">$7.99</div>
+        <div class="price-period">per month, or $49.99/year</div>
+        <ul class="price-features">
+          <li><span>✓</span> Everything in Free</li>
+          <li><span>✓</span> Unlimited AI cover letters</li>
+          <li><span>✓</span> Application strength scorer</li>
+          <li><span>✓</span> AI lease analyser</li>
+          <li><span>✓</span> Suburb rental data</li>
+          <li><span>✓</span> Priority support</li>
+        </ul>
+        <a href="#waitlist" class="price-btn">Join waitlist</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="section-inner">
+    <div class="section-tag" style="color:rgba(255,255,255,0.45);">Get early access</div>
+    <h2 class="section-title">Be first when Renter launches.</h2>
+    <p class="section-sub">Join the waitlist and get free premium access for your first 3 months when we launch. Limited spots.</p>
+    <div class="final-form">
+      <input type="email" class="final-input" placeholder="Your email address" id="finalEmail">
+      <button class="final-btn" onclick="submitWaitlist('finalEmail','finalSuccess')">Get early access</button>
+    </div>
+    <div class="success-msg" id="finalSuccess" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);">You're on the list. We'll see you at launch.</div>
+    <p class="final-note">Free to join · No spam · 3 months free premium for waitlist members</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">
+      <div class="footer-mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3L21 9.5V20C21 20.6 20.6 21 20 21H15V15H9V21H4C3.4 21 3 20.6 3 20V9.5Z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="footer-word">Renter</span>
+    </div>
+    <div class="footer-tagline">Renting made simple. renterapp.com.au</div>
+  </div>
+  <div class="footer-links">
+    <a href="#">Privacy policy</a>
+    <a href="#">Terms of use</a>
+    <a href="#">Contact</a>
+    <a href="#">@renterapp</a>
+  </div>
+  <div class="footer-copy">© 2026 Renter App Pty Ltd · Built in Melbourne, Australia · For Australian renters everywhere</div>
+  <div class="footer-copy" style="margin-top:8px;">General guidance only, not legal advice. Tenancy laws vary by state and territory. Always check with your local tenancy authority or a qualified professional for advice specific to your situation.</div>
+</footer>
+
+<script>
+// ── WAITLIST FORM ──
+function submitWaitlist(inputId, successId) {
+  const input = document.getElementById(inputId);
+  const success = document.getElementById(successId);
+  const email = input.value.trim();
+  if (!email || !email.includes('@')) {
+    input.style.borderColor = '#EF4444';
+    setTimeout(() => { input.style.borderColor = ''; }, 1500);
+    return;
+  }
+  fetch('https://script.google.com/macros/s/AKfycbzl8WbhxzJMlaV7TFMm3wDbdxwF0ciCe_Ret_bXku6n_ruMiK8rgdSnCs8RmCwgQBF7/exec?email=' + encodeURIComponent(email), { method: 'GET', mode: 'no-cors' });
+  input.parentElement.style.display = 'none';
+  success.style.display = 'block';
+}
+
+// ── NAV SCROLL SHADOW ──
+const navEl = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  navEl.classList.toggle('scrolled', window.scrollY > 8);
+}, { passive: true });
+
+// ── SCROLL REVEAL ──
+// Main observer for .reveal blocks. When a block enters the viewport,
+// mark it visible and stagger any .stage-item children using data-delay.
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    el.classList.add('visible');
+    // Stagger .stage-item children — each carries a data-delay ms value
+    el.querySelectorAll('.stage-item').forEach(item => {
+      const delay = parseInt(item.dataset.delay || '0', 10);
+      setTimeout(() => item.classList.add('visible'), delay);
+    });
+    observer.unobserve(el);
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
