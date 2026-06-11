@@ -8,7 +8,7 @@
 <meta property="og:title" content="Renter: Renting made simple">
 <meta property="og:description" content="8.5 million Australians rent. Renter is the first app built entirely for the renting side of the equation.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --blue: #1A3DE4;
@@ -96,8 +96,7 @@ nav {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  text-align: left;
   padding: 120px 1.5rem 80px;
   background: var(--white);
   position: relative;
@@ -117,13 +116,13 @@ nav {
   position: absolute;
   width: 600px; height: 600px;
   background: radial-gradient(circle, rgba(26,61,228,0.07) 0%, transparent 70%);
-  top: 50%; left: 50%;
+  top: 50%; left: 20%;
   transform: translate(-50%, -60%);
   pointer-events: none;
 }
 
 .hero-inner {
-  max-width: 760px;
+  max-width: 600px;
   position: relative;
   z-index: 1;
 }
@@ -161,9 +160,9 @@ nav {
 h1 {
   font-family: var(--font);
   font-size: clamp(48px, 7.5vw, 84px);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.0;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.05em;
   color: var(--black);
   margin-bottom: 24px;
   opacity: 0;
@@ -179,7 +178,7 @@ h1 .accent { color: var(--blue); }
   color: var(--gray);
   line-height: 1.65;
   max-width: 520px;
-  margin: 0 auto 40px;
+  margin: 0 0 40px;
   opacity: 0;
   animation: fadeUp 0.7s ease 0.35s forwards;
 }
@@ -190,7 +189,7 @@ h1 .accent { color: var(--blue); }
   display: flex;
   gap: 8px;
   max-width: 460px;
-  margin: 0 auto 14px;
+  margin: 0 0 14px;
   opacity: 0;
   animation: fadeUp 0.7s ease 0.5s forwards;
 }
@@ -239,32 +238,6 @@ h1 .accent { color: var(--blue); }
   animation: fadeUp 0.7s ease 0.6s forwards;
 }
 
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 48px;
-  margin-top: 64px;
-  padding-top: 48px;
-  border-top: 0.5px solid var(--border);
-  opacity: 0;
-  animation: fadeUp 0.7s ease 0.75s forwards;
-}
-
-.stat-num {
-  font-family: var(--font);
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--blue);
-  letter-spacing: -0.04em;
-}
-
-.stat-label {
-  font-family: var(--font);
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--gray);
-  margin-top: 3px;
-}
 
 @keyframes fadeUp {
   from { opacity:0; transform:translateY(20px); }
@@ -304,8 +277,8 @@ section { padding: 96px 1.5rem; }
 .section-title {
   font-family: var(--font);
   font-size: clamp(28px, 4vw, 42px);
-  font-weight: 700;
-  letter-spacing: -0.035em;
+  font-weight: 800;
+  letter-spacing: -0.05em;
   line-height: 1.1;
   color: var(--black);
   margin-bottom: 16px;
@@ -546,113 +519,16 @@ section { padding: 96px 1.5rem; }
 /* ── MOAT ── */
 .moat { background: var(--off); }
 
-.moat-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: center;
-  margin-top: 56px;
-}
+.why-copy { max-width: 680px; margin-top: 32px; }
 
-.moat-table {
-  background: var(--white);
-  border-radius: 14px;
-  overflow: hidden;
-  border: 0.5px solid var(--border);
-}
-
-.moat-row {
-  display: grid;
-  grid-template-columns: 1fr 72px 72px;
-  padding: 12px 20px;
-  border-bottom: 0.5px solid var(--border);
-  align-items: center;
-  gap: 8px;
-}
-.moat-row:last-child { border-bottom: none; }
-
-.moat-row.header {
-  background: var(--off);
-  padding: 10px 20px;
-}
-
-.moat-header-label {
+.why-para {
   font-family: var(--font);
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--gray);
-  text-align: center;
-}
-.moat-header-label:first-child { text-align: left; }
-.moat-header-label.ours { color: var(--blue); }
-
-.moat-feature {
-  font-family: var(--font);
-  font-size: 13px;
+  font-size: clamp(16px, 2vw, 19px);
   font-weight: 400;
   color: var(--black);
-}
-
-.moat-check { text-align: center; font-size: 15px; }
-.check-yes { color: var(--green); }
-.check-no { color: #E2E8F0; }
-.check-renter { color: var(--blue); font-weight: 700; }
-
-/* ── PROOF ── */
-.proof { background: var(--off); }
-
-.proof-quotes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 56px;
-}
-
-.quote-card {
-  background: var(--white);
-  border-radius: 14px;
-  padding: 22px;
-  border: 0.5px solid var(--border);
-}
-
-.quote-text {
-  font-family: var(--font);
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--black);
-  line-height: 1.65;
-  font-style: italic;
-  margin-bottom: 16px;
-  letter-spacing: -0.01em;
-}
-
-.quote-author { display: flex; align-items: center; gap: 10px; }
-
-.quote-avatar {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font);
-  font-size: 11px;
-  font-weight: 600;
-  flex-shrink: 0;
-}
-
-.quote-name {
-  font-family: var(--font);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--black);
-  letter-spacing: -0.01em;
-}
-
-.quote-meta {
-  font-family: var(--font);
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--gray);
+  line-height: 1.7;
+  letter-spacing: -0.015em;
+  margin-bottom: 20px;
 }
 
 /* ── PRICING ── */
@@ -1082,15 +958,6 @@ nav.scrolled {
   flex-shrink: 0;
 }
 
-.quote-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-.quote-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(26,61,228,0.1);
-  border-color: rgba(26,61,228,0.2);
-}
-
 .price-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -1116,11 +983,10 @@ nav.scrolled {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 720px) {
-  .problem-grid, .moat-grid { grid-template-columns: 1fr; gap: 28px; }
-  .journey-stages, .proof-quotes, .features-big-grid { grid-template-columns: 1fr; }
+  .problem-grid { grid-template-columns: 1fr; gap: 28px; }
+  .journey-stages, .features-big-grid { grid-template-columns: 1fr; }
   .feature-big.featured { grid-column: span 1; grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; }
-  .hero-stats { gap: 24px; }
   .waitlist-form, .final-form { flex-direction: column; }
   .waitlist-input, .final-input {
     height: auto;
@@ -1149,34 +1015,14 @@ nav.scrolled {
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-inner">
-    <div class="hero-badge">
-      <div class="badge-dot"></div>
-      Launching in Australia. Join the waitlist.
-    </div>
     <h1>Renting made <span class="accent">simple.</span></h1>
-    <p class="hero-sub">
-      <strong>8.5 million Australians rent.</strong> Every tool that exists was built for landlords and agents. Renter is the first app built entirely for you, covering every step of the renting journey.
-    </p>
+    <p class="hero-sub">Every property app in Australia was built to help landlords find tenants. Not one was built to help tenants through the process. Until now.</p>
     <div class="waitlist-form" id="waitlist">
       <input type="email" class="waitlist-input" placeholder="Enter your email" id="heroEmail">
       <button class="waitlist-btn" onclick="submitWaitlist('heroEmail','heroSuccess')">Join waitlist</button>
     </div>
     <div class="success-msg" id="heroSuccess">You're on the list. We'll be in touch.</div>
     <p class="hero-note">Free to join · No spam · Be first when we launch</p>
-    <div class="hero-stats">
-      <div>
-        <div class="stat-num">8.5M</div>
-        <div class="stat-label">Australian renters</div>
-      </div>
-      <div>
-        <div class="stat-num">0</div>
-        <div class="stat-label">Apps built for them</div>
-      </div>
-      <div>
-        <div class="stat-num">1</div>
-        <div class="stat-label">App changing that</div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1186,7 +1032,7 @@ nav.scrolled {
 </div>
 
 <!-- PROBLEM -->
-<section class="problem">
+<section class="problem" style="padding: 80px 1.5rem;">
   <div class="section-inner">
     <div class="section-tag reveal">The problem</div>
     <div class="problem-grid">
@@ -1230,7 +1076,7 @@ nav.scrolled {
 </section>
 
 <!-- JOURNEY -->
-<section>
+<section style="padding: 96px 1.5rem 72px;">
   <div class="section-inner">
     <div class="section-tag reveal">The full journey</div>
     <h2 class="section-title reveal">Tools for every stage of renting.</h2>
@@ -1393,67 +1239,20 @@ nav.scrolled {
   </div>
 </section>
 
-<!-- MOAT -->
-<section class="moat">
+<!-- WHY -->
+<section class="moat" style="padding: 72px 1.5rem;">
   <div class="section-inner">
-    <div class="section-tag reveal">Built differently</div>
-    <div class="moat-grid">
-      <div>
-        <h2 class="section-title reveal">Built for one side only.</h2>
-        <p class="section-sub reveal" style="margin-bottom:14px;">Every property platform in Australia serves the whole market. Landlords, agents, and renters. Renter does one thing: works entirely for the person renting. No competing interests. No conflicting priorities.</p>
-        <p class="section-sub reveal">Renter is independent. We make money when renters get value, which means we only win when you do.</p>
-      </div>
-      <div class="moat-table reveal">
-        <div class="moat-row header" style="grid-template-columns:1fr 48px;">
-          <div class="moat-header-label">What makes Renter different</div>
-          <div class="moat-header-label ours">✓</div>
-        </div>
-        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">Built entirely for renters</div><div class="moat-check check-renter">✓</div></div>
-        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">AI cover letter tailored to each property</div><div class="moat-check check-renter">✓</div></div>
-        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">Application strength scoring with tips</div><div class="moat-check check-renter">✓</div></div>
-        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">AI lease analysis in plain English</div><div class="moat-check check-renter">✓</div></div>
-        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">Tenancy rights guide by state</div><div class="moat-check check-renter">✓</div></div>
-        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">Application tracker saved on your device</div><div class="moat-check check-renter">✓</div></div>
-        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">Suburb rental data and trends</div><div class="moat-check check-renter">✓</div></div>
-        <div class="moat-row" style="grid-template-columns:1fr 48px;"><div class="moat-feature">100% independent, works for you</div><div class="moat-check check-renter">✓</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROOF -->
-<section class="proof">
-  <div class="section-inner">
-    <div class="section-tag reveal">Early feedback</div>
-    <h2 class="section-title reveal">Renters who tested it early.</h2>
-    <div class="proof-quotes">
-      <div class="quote-card reveal">
-        <p class="quote-text">"The cover letter generator was genuinely good. It picked up on what I mentioned about the property and my situation. I got three inspection invites the same week I started using it."</p>
-        <div class="quote-author">
-          <div class="quote-avatar" style="background:#EEF1FD;color:#1A3DE4;">JH</div>
-          <div><div class="quote-name">Jess, 27</div><div class="quote-meta">Young professional, Melbourne</div></div>
-        </div>
-      </div>
-      <div class="quote-card reveal">
-        <p class="quote-text">"I pasted my lease into the analyser and it found a clause about break fees I had completely missed. That would have cost me hundreds. Worth every cent of the premium subscription."</p>
-        <div class="quote-author">
-          <div class="quote-avatar" style="background:#FAEEDA;color:#854F0B;">MA</div>
-          <div><div class="quote-name">Marcus, 43</div><div class="quote-meta">Long-term renter, Sydney</div></div>
-        </div>
-      </div>
-      <div class="quote-card reveal">
-        <p class="quote-text">"The application tracker sounds simple but it changed how I approached my search. I was applying to seven properties at once and had no idea where I stood. Now I can see everything in one place."</p>
-        <div class="quote-author">
-          <div class="quote-avatar" style="background:#FCEBEB;color:#A32D2D;">SW</div>
-          <div><div class="quote-name">Sarah, 38</div><div class="quote-meta">Family renting, Brisbane</div></div>
-        </div>
-      </div>
+    <div class="section-tag reveal">Why Renter exists</div>
+    <h2 class="section-title reveal">Built for one side only.</h2>
+    <div class="why-copy">
+      <p class="why-para reveal">Every property platform in Australia serves landlords, agents, and renters. That means when interests conflict, renters lose.</p>
+      <p class="why-para reveal">Renter works for one side only. No landlord tools, no agent dashboards, no competing priorities. When we build something, we ask one question: does this help the person renting? If not, we don't build it.</p>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section>
+<section style="padding: 80px 1.5rem;">
   <div class="section-inner">
     <div class="section-tag reveal">Pricing</div>
     <h2 class="section-title reveal">Start free. Upgrade when it matters.</h2>
@@ -1516,9 +1315,6 @@ nav.scrolled {
     <div class="footer-tagline">Renting made simple. renterapp.com.au</div>
   </div>
   <div class="footer-links">
-    <a href="#">Privacy policy</a>
-    <a href="#">Terms of use</a>
-    <a href="#">Contact</a>
     <a href="#">@renterapp</a>
   </div>
   <div class="footer-copy">© 2026 Renter App Pty Ltd · Built in Melbourne, Australia · For Australian renters everywhere</div>
