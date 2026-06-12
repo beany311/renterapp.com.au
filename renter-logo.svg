@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Blue rounded square background -->
+  <rect width="512" height="512" rx="128" fill="#1A3DE4"/>
+  <!-- House icon: original 24x24 viewBox, scaled to 256x256, centered at (128,128) -->
+  <g transform="translate(128,128) scale(10.6667)">
+    <path d="M3 9.5L12 3L21 9.5V20C21 20.6 20.6 21 20 21H15V15H9V21H4C3.4 21 3 20.6 3 20V9.5Z" fill="none" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+  </g>
+</svg>
